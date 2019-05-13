@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: About-Service
+Parameters:
+  Application:
+    Type: String
+    Default: about-service
+  ArtifactBucket:
+    Type: String
+  DatabaseUid:
+    Type: String
+    Default: ian
+  DatabasePwd:
+    Type: String
+    Default: rhodyhackerdog
+  DatabaseHost:
+    Type: String
+    Default: rickadvisor-about-db-replica.c52xkeof6emi.us-east-2.rds.amazonaws.com
+  DatabasePort:
+    Type: Number
+    Default: 5432
+  DatabaseName:
+    Type: String
+    Default: hotels
+Resources:
+  PGLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: PGLayer
+      Description: PG Dependency
+      ContentUri: s3://aboutservicebucket/dc1fce8b94041697253fe1f3a9868961
+      CompatibleRuntimes:
+      - nodejs8.10
+      RetentionPolicy: Retain
+  getHotelById:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs8.10
+      Handler: getHotelById.handler
+      Description: Gets hotel by ID param
+      CodeUri: s3://aboutservicebucket/3bbe476859454198862b8594484c477c
+      Timeout: 300
+      Layers:
+      - Ref: PGLayer
+      Environment:
+        Variables:
+          DatabaseUid:
+            Ref: DatabaseUid
+          DatabasePwd:
+            Ref: DatabasePwd
+          DatabaseHost:
+            Ref: DatabaseHost
+          DatabasePort:
+            Ref: DatabasePort
+          DatabaseName:
+            Ref: DatabaseName

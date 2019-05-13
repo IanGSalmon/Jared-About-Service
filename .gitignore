@@ -59,3 +59,15 @@ typings/
 
 # next.js build output
 .next
+
+# csv seed file
+data.csv
+
+# Artillery stress test
+hello.yml
+
+## PG Config
+CONFIG.js
+
+# master.yaml
+master.yaml

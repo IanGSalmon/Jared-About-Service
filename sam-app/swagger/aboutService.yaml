@@ -1,0 +1,81 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "aboutService"
+basePath: "/"
+schemes:
+- "https"
+- "http"
+paths:
+  /api/hotel:
+    get:
+      operationId: "getHotel"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          type: "number"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Hotel"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+        400:
+          description: "400 response"
+      x-amazon-apigateway-request-validator: "Validate query string parameters and\
+        \ headers"
+      x-amazon-apigateway-integration:
+        type: "mock"
+        # uri:
+        #   Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${getHotelById.Arn}/invocations"
+        responses:
+          default:
+            statusCode: 200
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            responseTemplates:
+              application/xml: "#set($inputRoot = $input.path('$'))\n$inputRoot.body"
+        passthroughBehavior: "when_no_templates"
+        httpMethod: "POST"
+        requestTemplates:
+          application/json: "#set($allParams = $input.params())\r\n{\r\n  \"params\" : {\r\n    #foreach($type in $allParams.keySet())\r\n    #set($params = $allParams.get($type))\r\n    \"$type\" : {\r\n      #foreach($paramName in $params.keySet())\r\n      \"$paramName\" : \"$util.escapeJavaScript($params.get($paramName))\"\r\n      #if($foreach.hasNext),#end\r\n      #end\r\n    }\r\n    #if($foreach.hasNext),#end\r\n    #end\r\n  },\r\n \"sourceIP\" : \"$context.identity.sourceIp\"\r\n\r\n}"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+    options:
+      responses:
+        200:
+          description: "200 response"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: 200
+        passthroughBehavior: "when_no_match"
+        httpMethod: "GET"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "mock"
+definitions:
+  Hotel:
+    type: object
+    properties:
+      content:
+        type: object
+x-amazon-apigateway-gateway-responses:
+  DEFAULT_5XX:
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+      gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+  DEFAULT_4XX:
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+      gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+x-amazon-apigateway-request-validators:
+  Validate query string parameters and headers:
+    validateRequestParameters: true
+    validateRequestBody: false

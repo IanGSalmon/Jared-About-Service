@@ -1,39 +1,10 @@
-# Project Name
+# RickAdvisor - a scalable clone of TripAdvisor 
 
-> Project description
+> Provided AWS solutions for backend system. Utilized RDS (PostgreSQL), API Gateway, Lambda, Elasticache.
 
-## Related Projects
+## Samples from repo
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-
-## Table of Contents
-
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-
-## Usage
-
-> Some usage instructions
-
-## Requirements
-
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
-## Development
-
-### Installing Dependencies
-
-From within the root directory:
-
-```sh
-npm install -g webpack
-npm install
-```
-
+Swagger yaml - https://github.com/redbeard-sdc/Jared-About-Service/blob/master/sam-app/swagger/aboutService.yaml
+SAM Deploy yaml - https://github.com/redbeard-sdc/Jared-About-Service/blob/master/sam-app/packaged.yaml
+Lambda handler sample - https://github.com/redbeard-sdc/Jared-About-Service/blob/master/sam-app/src/lambda/getHotelById.js
+Benchmark - 4000 RPS with t.2micro ec2 instances - https://imgur.com/a/HsvVa9k

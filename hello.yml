@@ -1,0 +1,21 @@
+config:
+  target: 'https://2mj7sd6epa.execute-api.us-east-2.amazonaws.com/devStage1'
+  # plugins:
+  #   expect: {}
+  phases:
+    - duration: 30
+      arrivalRate: 1000
+scenarios:
+  - flow:
+    - get:
+        url: "/api/hotel/200000"
+        # expect:
+        #   - statusCode: 200
+        #   - contentType: json
+
+# Public DNS
+# http://ec2-18-219-105-57.us-east-2.compute.amazonaws.com/
+
+# API Gateway
+# https://2mj7sd6epa.execute-api.us-east-2.amazonaws.com/devStage1
+## /api/hotel/200000

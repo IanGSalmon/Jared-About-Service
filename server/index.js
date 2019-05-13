@@ -1,29 +1,15 @@
+const nr = require('newrelic');
 const express = require('express');
-const app = express();
-const PORT = 3000;
 const path = require('path');
-const database = require('../database/index.js');
+const PORT = 3001;
 const cors = require('cors');
 
+const app = express();
+
 app.use(cors());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "../public")));
 
-app.get('/hotels', (req, res) => {
-  database
-    .getAllHotels()
-    .then(results => {
-      res.json(results);
-    })
-    .catch(console.log);
+app.listen(PORT, (err) => {
+  console.log(`Server listening on port ${PORT}`)
 });
-
-app.get('/hotels/:name', (req, res) => {
-  database
-    .getHotel(req.params.name)
-    .then(results => {
-      res.json(results);
-    })
-    .catch(console.log);
-});
-
-app.listen(PORT);
