@@ -1,5 +1,5 @@
 # Rick Advisor 
-A TripAdvisor clone developed using service oriented architechture. This application is a full-stack microservice for the 'About' section on a TripAdvisor hotel page. The backend was build using Amazon Web Services: AWS RDS PostgreSQL, API Gateway, Lambda, ElastiCache, EC@, EC2
+A TripAdvisor clone developed using service oriented architechture. This application is a full-stack microservice for the 'About' section on a TripAdvisor hotel page. The backend was build using Amazon Web Services: AWS RDS PostgreSQL, API Gateway, Lambda, ElastiCache, ECS, EC2
 
 ## AWS Code samples
 Swagger yaml - https://github.com/redbeard-sdc/Jared-About-Service/blob/master/sam-app/swagger/aboutService.yaml 
