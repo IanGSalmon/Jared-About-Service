@@ -11,38 +11,6 @@ const pool = new Pool({
   max: 50,
 });
 
-exports.handler = (event, context, callback) => {
-  console.log(event);
-  const { id } = event.pathParameters;
-  const queryString = `SELECT * FROM hotel WHERE id=${id}`;
-
-  pool.query(queryString, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      callback(null, {
-        statusCode: 200,
-        body: result
-      });
-    }
-  });
-};
-
-/*
-const { Pool } = require('pg')
-
-const pool = new Pool({
-    host: 'rickadvisor-about-db-replica.c52xkeof6emi.us-east-2.rds.amazonaws.com',
-    database: 'hotels',
-    user: 'ian',
-    password: 'rhodyhackerdog',
-    port: 5432,
-    max: 1,
-    min: 0,
-    idleTimeoutMillis: 300000,
-    connectionTimeoutMillis: 1000
-});
-
 module.exports.handler = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
 
@@ -73,4 +41,3 @@ module.exports.handler = (event, context, callback) => {
         callback(null, response);
     });
 };
-*.
