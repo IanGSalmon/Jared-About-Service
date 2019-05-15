@@ -12,32 +12,38 @@ const pool = new Pool({
 });
 
 module.exports.handler = (event, context, callback) => {
-    context.callbackWaitsForEmptyEventLoop = false;
+  context.callbackWaitsForEmptyEventLoop = false;
+    
+//   For deployment uncomment lns 18-19
+//   const { id } = event.pathParameters;
+//   const queryString = `SELECT * FROM hotel WHERE id=${id}`;
+  
+  let client;
+  pool.connect().then(c => {
+    client = c;
+//      for deployement uncomment line 25, delete line 26
+//       return client.query(`${queryString}`);
+    return client.query("SELECT * FROM hotel WHERE id=1");
+  }).then(res => {
+    client.release();
+    const response =  {
+      "isBase64Encoded": false,
+      "statusCode": 200,
+      "body": JSON.stringify(res.rows),
+      "headers": {
+                  "Access-Control-Allow-Origin": "*",
+                  "Access-Control-Allow-Credentials": true
+                  }
+      }
+    callback(null, response);
+  }).catch(error => {
+  console.log("ERROR", error);
+    const response =  {
+      "isBase64Encoded": false,
+      "statusCode": 500,
+      "body": JSON.stringify(error)
+    }
 
-    let client;
-    pool.connect().then(c => {
-        client = c;
-        return client.query("SELECT * FROM hotel WHERE id=1");
-    }).then(res => {
-        client.release();
-        const response =  {
-            "isBase64Encoded": false,
-            "statusCode": 200,
-            "body": JSON.stringify(res.rows),
-            "headers": {
-                        "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Credentials": true
-                        }
-        }
-        callback(null, response);
-    }).catch(error => {
-        console.log("ERROR", error);
-        const response =  {
-            "isBase64Encoded": false,
-            "statusCode": 500,
-            "body": JSON.stringify(error)
-        }
-
-        callback(null, response);
-    });
+    callback(null, response);
+  });
 };
