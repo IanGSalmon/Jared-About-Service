@@ -1,4 +1,4 @@
-# Rick Advisor 
+# Rick Advisor - About Microservice
 A TripAdvisor clone developed using service oriented architechture. This application is a full-stack microservice for the 'About' section on a TripAdvisor hotel page. The backend was build using Amazon Web Services: AWS RDS PostgreSQL, API Gateway, Lambda, ElastiCache, ECS, EC2
 
 ## AWS Code samples
@@ -8,7 +8,7 @@ A TripAdvisor clone developed using service oriented architechture. This applica
 
 [Lambda handler sample](https://github.com/IanGSalmon/Jared-About-Service/blob/master/sam-app/src/lambda/getHotelById.js)
 
-![Benchmark - 4000 RPS with t.2micro ec2 instance](https://imgur.com/a/HsvVa9k)
+[Benchmark - 4000 RPS with t.2micro ec2 instance](https://imgur.com/a/HsvVa9k)
 
 ## Getting Started
 
