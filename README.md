@@ -8,7 +8,7 @@ A TripAdvisor clone developed using service oriented architechture. This applica
 
 (Lambda handler sample)[https://github.com/IanGSalmon/Jared-About-Service/blob/master/sam-app/src/lambda/getHotelById.js]
 
-(Benchmark - 4000 RPS with t.2micro ec2 instances)[https://imgur.com/a/HsvVa9k]
+!(Benchmark - 4000 RPS with t.2micro ec2 instances)[https://imgur.com/a/HsvVa9k]
 
 ## Getting Started
 
