@@ -9,10 +9,10 @@ Parameters:
     Type: String
   DatabaseUid:
     Type: String
-    Default: ian
+    Default: ## ENV
   DatabasePwd:
     Type: String
-    Default: rhodyhackerdog
+    Default: ## ENV
   DatabaseHost:
     Type: String
     Default: rickadvisor-about-db-replica.c52xkeof6emi.us-east-2.rds.amazonaws.com
